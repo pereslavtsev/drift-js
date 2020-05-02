@@ -32,16 +32,29 @@ describe('Users API', () => {
   });
 
   describe('Retrieving a User', () => {
-    let user: User;
+    describe('Retrieving by ID', () => {
+      let user: User;
 
-    beforeAll(async () => {
-      expect(process.env.REAL_USER_ID).toBeDefined();
-      realUserID = parseInt(String(process.env.REAL_USER_ID));
-      user = await drift.users.getById(realUserID);
+      beforeAll(async () => {
+        user = await drift.users.getById(realUserID);
+      });
+
+      it('it should be an object', () => {
+        expect(typeof user).toBe('object');
+      });
     });
 
-    it('it should be an object', () => {
-      expect(typeof user).toBe('object');
+    describe('Retrieving by ID (alternative)', () => {
+      let users: { data: { [key: number]: User } };
+
+      beforeAll(async () => {
+        users = await drift.users.getByIds([realUserID]);
+        console.log(users.data)
+      });
+
+      it('it should be an object', () => {
+        expect(typeof users.data[realUserID]).toBe('object');
+      });
     });
   });
 });

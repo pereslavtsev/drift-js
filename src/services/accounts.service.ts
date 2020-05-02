@@ -11,25 +11,25 @@ export class AccountsService<T = Account> extends BaseService {
     return data.data;
   }
 
-  async getById(accountId: Account['accountId']) {
-    const { data } = await this.api.get<{ data: T }>(`accounts/${accountId}`);
+  async getById(id: Account['accountId']) {
+    const { data } = await this.api.get<{ data: T }>(`accounts/${id}`);
     return data.data;
   }
 
-  async updateById(accountId: Account['accountId'], account: AccountData) {
+  async updateById(id: Account['accountId'], account: AccountData) {
     const { data } = await this.api.patch<{ data: T }>(`accounts/update`, {
-      accountId,
+      id,
       ...account,
     });
     return data.data;
   }
 
-  async deleteById(accountId: Account['accountId']) {
+  async deleteById(id: Account['accountId']) {
     type Result = {
       result: 'OK';
       ok: boolean;
     };
-    const { data } = await this.api.delete<Result>(`accounts/${accountId}`);
+    const { data } = await this.api.delete<Result>(`accounts/${id}`);
     return data.ok;
   }
 }

@@ -29,14 +29,40 @@ describe('Conversations API', () => {
   });
 
   describe('Listing Conversations', () => {
-    let conversations: Conversation[];
+    describe('Retrieving without query params', () => {
+      let conversations: Conversation[];
 
-    beforeAll(async () => {
-      conversations = await drift.conversations.list();
+      beforeAll(async () => {
+        const { data } = await drift.conversations.list();
+        conversations = data;
+      });
+
+      it(`it should be an array`, async () => {
+        expect(Array.isArray(conversations)).toBeTruthy();
+      });
     });
 
-    it(`it should be an array`, async () => {
-      expect(Array.isArray(conversations)).toBeTruthy();
+    describe('Retrieving a first 10 conversations', () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      let list: any;
+
+      beforeAll(async () => {
+        list = await drift.conversations.list({ limit: 10 });
+      });
+
+      it(`it should be an array`, () => {
+        expect(Array.isArray(list.data)).toBeTruthy();
+      });
+
+      it(`it should has a 10 conversations only`, () => {
+        expect((list.data as Conversation[]).length).toEqual(10);
+      });
+
+      // it(`it should has next 10 conversations`, async () => {
+      //   const newList = await list.next();
+      //   console.log('newList', newList.data)
+      //   expect(Array.isArray(newList.data)).toBeTruthy();
+      // });
     });
   });
 });

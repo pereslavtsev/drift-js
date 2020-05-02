@@ -2,11 +2,7 @@ import { BaseService } from './base.service';
 import { User } from '../interfaces';
 
 export class UsersService extends BaseService {
-  public list() {
-    return this.getAll();
-  }
-
-  async getAll() {
+  async list() {
     const { data } = await this.api.get<{ data: User[] }>('users/list');
     return data.data;
   }
@@ -16,10 +12,10 @@ export class UsersService extends BaseService {
     return data.data;
   }
 
-  async getByIds(userIds?: User['id'][]) {
+  async getByIds(ids: User['id'][]) {
     const { data } = await this.api.get<{ data: { [key: number]: User } }>('users', {
       params: {
-        userId: userIds,
+        userId: ids,
       },
     });
     return data;

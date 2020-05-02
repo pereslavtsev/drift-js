@@ -1,4 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
+import qs from 'querystring';
 import {
   AccountsService,
   ContactsService,
@@ -22,6 +23,9 @@ export class SDK {
         'Content-Type': 'application/json',
         'User-Agent': SDK.USER_AGENT,
       },
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // @ts-ignore
+      paramsSerializer: params => qs.stringify(params, { arrayFormat: 'repeat' }),
     });
   }
 

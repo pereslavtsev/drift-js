@@ -7,13 +7,13 @@ export class ContactsService extends BaseService {
     return data.data;
   }
 
-  async getById(contactId: Contact['id']) {
-    const { data } = await this.api.get<{ data: Contact }>(`contacts/${contactId}`);
+  async getById(id: Contact['id']) {
+    const { data } = await this.api.get<{ data: Contact }>(`contacts/${id}`);
     return data.data;
   }
 
-  async deleteById(contactId: Contact['id']) {
-    const { status } = await this.api.delete<{ data: Contact }>(`contacts/${contactId}`);
+  async deleteById(id: Contact['id']) {
+    const { status } = await this.api.delete<{ data: Contact }>(`contacts/${id}`);
     return status === 202;
   }
 }
