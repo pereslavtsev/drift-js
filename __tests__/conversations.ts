@@ -27,4 +27,16 @@ describe('Conversations API', () => {
       expect(conversation.id).toEqual(realConversationID);
     });
   });
+
+  describe('Listing Conversations', () => {
+    let conversations: Conversation[];
+
+    beforeAll(async () => {
+      conversations = await drift.conversations.list();
+    });
+
+    it(`it should be an array`, async () => {
+      expect(Array.isArray(conversations)).toBeTruthy();
+    });
+  });
 });
