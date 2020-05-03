@@ -17,20 +17,23 @@ type NewMessage = Pick<
 
 type Result<T> = {
   data: T[];
-  pagination: {
+  pagination?: {
     more: boolean;
     next: string;
   };
 };
 
-export class ConversationsService<T = Conversation> extends BaseService {
+export class ConversationsService extends BaseService {
   async getById(id: Conversation['id']) {
-    const { data } = await this.api.get<{ data: T }>(`conversations/${id}`);
+    const { data } = await this.api.get<{ data: Conversation }>(`conversations/${id}`);
     return data.data;
   }
 
   async sendMessage(to: Conversation['id'], msg: NewMessage) {
-    const { data } = await this.api.post<{ data: T }>(`conversations/${to}/list`, msg);
+    const { data } = await this.api.post<{ data: Conversation }>(
+      `conversations/${to}/list`,
+      msg
+    );
     return data.data;
   }
 
@@ -45,28 +48,11 @@ export class ConversationsService<T = Conversation> extends BaseService {
   }
 
   async list(params?: ListingParams) {
-    const { data } = await this.api.get<Result<T>>('conversations/list', {
+    const { data } = await this.api.get<Result<Conversation>>('conversations/list', {
       params,
     });
     return {
       ...data,
-      // next: () =>
-      //   new Promise(resolve => {
-      //     if (!data.pagination.more) {
-      //       resolve();
-      //     }
-      //     if (data.pagination.next) {
-      //       resolve(
-      //         this.list({
-      //           limit: params?.limit,
-      //           statusId: params?.statusId,
-      //           next: parseInt(data.pagination.next),
-      //         })
-      //       );
-      //     } else {
-      //       resolve();
-      //     }
-      //   }),
     };
   }
 }

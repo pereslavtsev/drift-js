@@ -24,11 +24,12 @@ describe('Accounts API', () => {
     beforeAll(async () => {
       domain = faker.internet.domainName();
       name = faker.company.companyName();
-      account = await drift.accounts.create({
+      const { data } = await drift.accounts.create({
         ownerId,
         domain,
         name,
       });
+      account = data;
     });
 
     it('it should be an non nullable', () => {
@@ -50,7 +51,8 @@ describe('Accounts API', () => {
     let retrieved: Account;
 
     beforeAll(async () => {
-      retrieved = await drift.accounts.getById(account.accountId);
+      const { data } = await drift.accounts.getById(account.accountId);
+      retrieved = data;
     });
 
     it('a created contact should be founded', () => {
@@ -65,11 +67,12 @@ describe('Accounts API', () => {
 
     beforeAll(async () => {
       name = faker.company.companyName();
-      changed = await drift.accounts.updateById(account.accountId, {
+      const { data } = await drift.accounts.updateById(account.accountId, {
         name,
         domain: account.domain,
         ownerId: account.ownerId,
       });
+      changed = data;
     });
 
     it('a name of created account should be changed', () => {

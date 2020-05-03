@@ -2,6 +2,7 @@ import axios, { AxiosInstance } from 'axios';
 import qs from 'querystring';
 import {
   AccountsService,
+  AppService,
   ContactsService,
   ConversationsService,
   UsersService,
@@ -9,13 +10,19 @@ import {
 
 export interface SDKOptions {
   accessToken: string;
+  clientId: string;
+  clientSecret: string;
 }
 
+/** Drift SDK */
 export class SDK {
   private readonly api: AxiosInstance;
+  private readonly options: SDKOptions;
+
   static readonly USER_AGENT = 'Drift Javascript SDK';
 
   constructor(o: SDKOptions) {
+    this.options = o;
     this.api = axios.create({
       baseURL: 'https://driftapi.com/',
       headers: {
@@ -30,18 +37,22 @@ export class SDK {
   }
 
   get accounts() {
-    return AccountsService.init(this.api) as AccountsService;
+    return AccountsService.init(this.api, this.options) as AccountsService;
+  }
+
+  get app() {
+    return AppService.init(this.api, this.options) as AppService;
   }
 
   get contacts() {
-    return ContactsService.init(this.api) as ContactsService;
+    return ContactsService.init(this.api, this.options) as ContactsService;
   }
 
   get conversations() {
-    return ConversationsService.init(this.api) as ConversationsService;
+    return ConversationsService.init(this.api, this.options) as ConversationsService;
   }
 
   get users() {
-    return UsersService.init(this.api) as UsersService;
+    return UsersService.init(this.api, this.options) as UsersService;
   }
 }

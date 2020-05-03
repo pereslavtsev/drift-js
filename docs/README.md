@@ -1,3 +1,7 @@
-# Headline
+# Drift JS
 
-> An awesome project.
+> A Drift API wrapper written in JavaScript.
+
+## License
+
+MIT

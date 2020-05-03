@@ -20,7 +20,8 @@ describe('Users API', () => {
     let users: User[];
 
     beforeAll(async () => {
-      users = await drift.users.list();
+      const { data } = await drift.users.list();
+      users = data;
     });
 
     it('it should be array of objects', () => {
@@ -36,7 +37,8 @@ describe('Users API', () => {
       let user: User;
 
       beforeAll(async () => {
-        user = await drift.users.getById(realUserID);
+        const { data } = await drift.users.getById(realUserID);
+        user = data;
       });
 
       it('it should be an object', () => {
@@ -49,7 +51,6 @@ describe('Users API', () => {
 
       beforeAll(async () => {
         users = await drift.users.getByIds([realUserID]);
-        console.log(users.data)
       });
 
       it('it should be an object', () => {

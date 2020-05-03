@@ -12,8 +12,15 @@
   <div id="app"></div>
   <script>
     window.$docsify = {
+      logo: '/_media/icon.svg',
+      themeColor: '#2d88f3',
       name: 'drift-js',
-      repo: 'https://github.com/pereslavtsev/drift-js'
+      subMaxLevel: 2,
+      repo: 'https://github.com/pereslavtsev/drift-js',
+      loadSidebar: true,
+      alias: {
+        '/.*/_sidebar.md': '/_sidebar.md'
+      }
     }
   </script>
   <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
