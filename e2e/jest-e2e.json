@@ -2,5 +2,5 @@
   "preset": "ts-jest",
   "testEnvironment": "node",
   "setupFiles": ["dotenv/config"],
-  "testPathIgnorePatterns": ["helpers.ts"]
+  "testRegex": "/e2e/.*\\.(e2e-test|e2e-spec).(ts|tsx|js)$"
 }

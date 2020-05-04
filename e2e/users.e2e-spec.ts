@@ -1,6 +1,5 @@
-import SDK from '../src';
+import SDK, { User } from '../src';
 import { makeSDKInstance } from './helpers';
-import { User } from '../src';
 
 describe('Users API', () => {
   let drift: SDK;

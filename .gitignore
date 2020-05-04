@@ -1,8 +1,12 @@
 lib
 dist
 coverage
+.nyc_output
 
 node_modules
+
+# misc
+.DS_Store
 
 # Logs
 logs
@@ -16,3 +20,5 @@ npm-debug.log*
 .idea
 
 .env
+
+webpack.config.js
