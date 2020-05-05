@@ -1,19 +1,16 @@
 jobs:
-  install-packages:
+  test:
     steps:
       - checkout
       - node/install-packages:
           cache-key: yarn.lock
           pkg-manager: yarn
       - run:
-          command: npm run test
+          command: yarn test:all
 orbs:
   node: circleci/node@2.0.3
 version: 2.1
 workflows:
   test:
     jobs:
-      - install-packages
-      - node/test:
-          run-command: test:all
-          pkg-manager: yarn
+      - test
