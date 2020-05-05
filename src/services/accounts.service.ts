@@ -56,7 +56,7 @@ export class AccountsService extends BaseService {
    */
   async updateById(id: Account['accountId'], fields: AccountData) {
     const { data } = await this.api.patch<{ data: Account }>(`accounts/update`, {
-      id,
+      accountId: id,
       ...fields,
     });
     return data;

@@ -2,8 +2,16 @@
   "name": "drift-js",
   "version": "1.6.1",
   "description": "Drift JavaScript SDK",
-  "main": "index.js",
-  "repository": "https://github.com/pereslavtsev/drift-js",
+  "main": "dist/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "dist",
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pereslavtsev/drift-js"
+  },
   "author": {
     "name": "Vitaly Pereslavtsev",
     "email": "dev@pereslavtsev.com",
@@ -21,11 +29,11 @@
     "lint": "eslint --ext .ts --ignore-path .gitignore .",
     "lint:all": "yarn tsc && yarn lint && yarn lint:styles",
     "lint:fix": "yarn lint --fix",
-    "test": "jest",
+    "test": "jest --config ./.jestrc.json",
     "test:all": "yarn test && yarn test:e2e",
-    "test:watch": "yarn test --watch",
-    "test:cov": "yarn test --coverage",
-    "test:e2e": "yarn test --verbose --config ./e2e/jest-e2e.json",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:e2e": "jest --verbose --config ./e2e/jest-e2e.json",
     "typedoc": "sh update_docs.sh"
   },
   "config": {

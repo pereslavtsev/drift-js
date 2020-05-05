@@ -1,0 +1,10 @@
+{
+  "preset": "ts-jest",
+  "testEnvironment": "node",
+  "testRegex": "/src/.*\\.(test|spec).ts$",
+  "collectCoverageFrom": [
+    "src/**/*.ts",
+    "!**/node_modules/**"
+  ],
+  "coverageReporters": ["json", "lcov"]
+}

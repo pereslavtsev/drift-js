@@ -1,6 +1,10 @@
 import SDK, { Conversation } from '../src';
 import { makeSDKInstance } from './helpers';
 
+function numberOrUndefined(o: undefined | number) {
+  return typeof o === 'undefined' || typeof o === 'number';
+}
+
 describe('Conversations API', () => {
   let drift: SDK;
   let realConversationID: Conversation['id'];
@@ -63,6 +67,40 @@ describe('Conversations API', () => {
       //   console.log('newList', newList.data)
       //   expect(Array.isArray(newList.data)).toBeTruthy();
       // });
+    });
+  });
+
+  describe('Bulk Conversation Statuses', () => {
+    let data: {
+      CLOSED?: number;
+      OPEN?: number;
+      PENDING?: number;
+    };
+
+    beforeAll(async () => {
+      const { conversationCount } = await drift.conversations.stats();
+
+      data = conversationCount;
+    });
+
+    it(`it should be defined`, () => {
+      expect(data).toBeDefined();
+    });
+
+    it(`it should be an object`, () => {
+      expect(typeof data).toBe('object');
+    });
+
+    it(`CLOSED should be number`, () => {
+      expect(numberOrUndefined(data.CLOSED)).toBeTruthy();
+    });
+
+    it(`OPEN should be number`, () => {
+      expect(numberOrUndefined(data.OPEN)).toBeTruthy();
+    });
+
+    it(`PENDING should be number`, () => {
+      expect(numberOrUndefined(data.PENDING)).toBeTruthy();
     });
   });
 });

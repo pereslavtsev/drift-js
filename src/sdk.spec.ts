@@ -1,11 +1,15 @@
+import faker from 'faker';
 import SDK from '../src';
-import { makeSDKInstance } from './helpers';
 
 describe('SDK init', () => {
   let drift: SDK;
 
   beforeAll(() => {
-    drift = makeSDKInstance();
+    drift = new SDK({
+      accessToken: faker.random.uuid(),
+      clientSecret: faker.random.uuid(),
+      clientId: faker.random.uuid(),
+    });
   });
 
   it('it should be an instance of Drift Javascript SDK class', () => {
