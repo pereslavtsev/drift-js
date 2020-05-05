@@ -1,4 +1,4 @@
-import SDK, { SDKOptions } from '../src';
+import SDK, { SDKOptions, TokenInfo } from '../src';
 import { makeSDKInstance } from './helpers';
 
 describe('App API', () => {
@@ -15,8 +15,12 @@ describe('App API', () => {
     accessToken = String(process.env.ACCESS_TOKEN);
   });
 
-  describe('Get Token Information', async () => {
-    const tokenInfo = await drift.app.getTokenInfo();
+  describe('Get Token Information', () => {
+    let tokenInfo: TokenInfo;
+
+    beforeAll(async () => {
+      tokenInfo = await drift.app.getTokenInfo();
+    });
 
     it('it should be defined', () => {
       expect(tokenInfo).toBeDefined();
