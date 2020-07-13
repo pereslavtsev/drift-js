@@ -67,7 +67,7 @@
     "lint-staged": "^10.2.2",
     "prettier": "^2.0.5",
     "shortid": "^2.2.15",
-    "standard-version": "^7.1.0",
+    "standard-version": "^8.0.1",
     "ts-jest": "^25.4.0",
     "ts-loader": "^7.0.2",
     "typedoc": "^0.17.6",
